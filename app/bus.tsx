@@ -45,9 +45,11 @@ const BusScreen = () => {
             </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.searchButton}>
-          <Text style={styles.searchButtonText}>Search Buses</Text>
-        </TouchableOpacity>
+        <Link href="/bus-list" asChild>
+            <TouchableOpacity style={styles.searchButton}>
+            <Text style={styles.searchButtonText}>Search Buses</Text>
+            </TouchableOpacity>
+        </Link>
 
         <View style={styles.recentSearchContainer}>
             <Text style={styles.recentSearchTitle}>Recent Searches</Text>

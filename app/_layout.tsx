@@ -18,9 +18,21 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
         <Stack.Screen 
-          name="bus" 
+          name="bus"
           options={{ 
             title: '', 
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#d32f2f',
+            },
+            headerTintColor: '#fff',
+            headerBackTitleVisible: false
+          }} 
+        />
+        <Stack.Screen 
+          name="bus-list" 
+          options={{ 
+            title: 'Buses', 
             headerShown: true,
             headerStyle: {
               backgroundColor: '#d32f2f',

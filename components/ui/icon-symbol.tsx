@@ -28,6 +28,7 @@ const MAPPING = {
   bell: 'notifications',
   'arrow.up.arrow.down': 'swap-vert',
   calendar: 'date-range',
+  star: 'star',
 } as IconMapping;
 
 /**
