@@ -64,25 +64,6 @@ const BusScreen = () => {
             </View>
         </View>
       </ScrollView>
-
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-            <IconSymbol name="house.fill" size={24} color="#d32f2f" />
-            <Text style={styles.navTextActive}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-            <IconSymbol name="bus" size={24} color="gray" />
-            <Text style={styles.navText}>My Trips</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-            <IconSymbol name="card-travel" size={24} color="gray" />
-            <Text style={styles.navText}>Offers</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-            <IconSymbol name="bell" size={24} color="gray" />
-            <Text style={styles.navText}>Account</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
