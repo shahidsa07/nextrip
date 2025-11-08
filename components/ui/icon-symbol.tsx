@@ -25,6 +25,9 @@ const MAPPING = {
   bus: 'directions-bus',
   hotel: 'hotel',
   'card-travel': 'card-travel',
+  bell: 'notifications',
+  'arrow.up.arrow.down': 'swap-vert',
+  calendar: 'date-range',
 } as IconMapping;
 
 /**

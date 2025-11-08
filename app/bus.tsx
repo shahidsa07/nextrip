@@ -1,71 +1,91 @@
 
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Modal, FlatList, Image } from 'react-native';
-import { Calendar } from 'react-native-calendars';
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { Link } from 'expo-router';
 
 const BusScreen = () => {
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [date, setDate] = useState('Select Date');
-  const [showCalendar, setShowCalendar] = useState(false);
-  const [buses, setBuses] = useState([]);
-
-  const handleDateSelect = (selectedDate) => {
-    setDate(selectedDate.dateString);
-    setShowCalendar(false);
-  };
-
-  const handleSearch = () => {
-    // In a real app, you would fetch bus data from an API
-    setBuses([
-      { id: '1', name: 'Luxury Travels', route: 'New York to Boston', price: '$50', rating: '4.5', image: 'https://via.placeholder.com/150' },
-      { id: '2', name: 'Speedy Bus', route: 'New York to Boston', price: '$45', rating: '4.2', image: 'https://via.placeholder.com/150' },
-      { id: '3', name: 'Comfort Liners', route: 'New York to Boston', price: '$55', rating: '4.8', image: 'https://via.placeholder.com/150' },
-    ]);
-  };
-
   return (
     <View style={styles.container}>
-      <View style={styles.form}>
-        <TextInput
-          style={styles.input}
-          placeholder="From"
-          value={from}
-          onChangeText={setFrom}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="To"
-          value={to}
-          onChangeText={setTo}
-        />
-        <TouchableOpacity style={styles.dateButton} onPress={() => setShowCalendar(true)}>
-          <Text style={styles.dateButtonText}>{date}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
+      <ScrollView>
+        <View style={styles.header}>
+          <Text style={styles.logo}>redBus</Text>
+          <IconSymbol name="bell" size={24} color="white" />
+        </View>
+
+        <View style={styles.tabContainer}>
+          <TouchableOpacity style={styles.tabItem}>
+            <Text style={styles.tabTextActive}>Bus Tickets</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.tabItem}>
+            <Text style={styles.tabText}>rPool <Text style={styles.newBadge}>New</Text></Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.tabItem}>
+            <Text style={styles.tabText}>Bus Hire</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.searchCard}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>From</Text>
+            <TextInput style={styles.input} defaultValue="New Delhi" />
+          </View>
+          <View style={styles.swapIconContainer}>
+             <IconSymbol name="arrow.up.arrow.down" size={24} color="black" />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>To</Text>
+            <TextInput style={styles.input} defaultValue="Hamirpur, Himachal Pradesh" />
+          </View>
+        </View>
+
+        <View style={styles.dateCard}>
+            <IconSymbol name="calendar" size={24} color="black" />
+            <Text style={styles.dateText}>Wed, 17 March</Text>
+            <TouchableOpacity>
+                <Text style={styles.dayText}>TODAY</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+                <Text style={styles.dayText}>TOMORROW</Text>
+            </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.searchButton}>
           <Text style={styles.searchButtonText}>Search Buses</Text>
         </TouchableOpacity>
-      </View>
 
-      <Modal visible={showCalendar} animationType="slide">
-        <Calendar onDayPress={handleDateSelect} />
-      </Modal>
-
-      <FlatList
-        data={buses}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.busCard}>
-            <Image source={{ uri: item.image }} style={styles.busImage} />
-            <View style={styles.busDetails}>
-              <Text style={styles.busName}>{item.name}</Text>
-              <Text>{item.route}</Text>
-              <Text>{item.price}</Text>
-              <Text>Rating: {item.rating}</Text>
+        <View style={styles.recentSearchContainer}>
+            <Text style={styles.recentSearchTitle}>Recent Searches</Text>
+            <View style={styles.recentSearchCard}>
+                <View>
+                    <Text style={styles.recentSearchText}>DELHI - HAMIRPUR (HIMACHAL PRADESH)</Text>
+                    <Text style={styles.recentSearchDate}>Wed, 31 March</Text>
+                </View>
+                <TouchableOpacity style={styles.bookNowButton}>
+                    <Text style={styles.bookNowText}>Book Now</Text>
+                </TouchableOpacity>
             </View>
-          </View>
-        )}
-      />
+        </View>
+      </ScrollView>
+
+      <View style={styles.bottomNav}>
+        <TouchableOpacity style={styles.navItem}>
+            <IconSymbol name="house.fill" size={24} color="#d32f2f" />
+            <Text style={styles.navTextActive}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+            <IconSymbol name="bus" size={24} color="gray" />
+            <Text style={styles.navText}>My Trips</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+            <IconSymbol name="card-travel" size={24} color="gray" />
+            <Text style={styles.navText}>Offers</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+            <IconSymbol name="bell" size={24} color="gray" />
+            <Text style={styles.navText}>Account</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -73,60 +93,173 @@ const BusScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    paddingTop: 50,
+    backgroundColor: '#d32f2f',
   },
-  form: {
-    marginBottom: 16,
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingTop: 50,
+    paddingBottom: 16,
+  },
+  logo: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#d32f2f',
+    marginHorizontal: 16,
+    borderRadius: 8,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: '#c62828'
+  },
+  tabItem: {
+    padding: 8,
+    
+  },
+  tabText: {
+    color: 'white',
+    fontSize: 14,
+  },
+  tabTextActive:{
+    color: 'white',
+    fontSize: 14,
+    borderBottomColor: 'white',
+    borderBottomWidth: 2, 
+    paddingBottom: 4,
+  },
+  newBadge: {
+    color: '#4caf50',
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+  searchCard: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    margin: 16,
+    padding: 16,
+  },
+  inputContainer: {
+    marginBottom: 8,
+  },
+  label: {
+    color: 'gray',
+    fontSize: 12,
   },
   input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-  },
-  dateButton: {
-    height: 40,
-    backgroundColor: '#007BFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  dateButtonText: {
-    color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee',
+    paddingBottom: 4,
+  },
+  swapIconContainer: {
+    position: 'absolute',
+    right: 16,
+    top: '50%',
+    transform: [{ translateY: -12 }],
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 4,
+    borderColor: '#eee',
+    borderWidth: 1
+  },
+  dateCard: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 8,
+    marginHorizontal: 16,
+    padding: 16,
+    marginTop: -8
+  },
+  dateText: {
+    flex: 1,
+    marginLeft: 8,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  dayText: {
+    color: '#007BFF',
+    fontWeight: 'bold',
+    fontSize: 12
   },
   searchButton: {
-    height: 40,
-    backgroundColor: '#28A745',
-    justifyContent: 'center',
+    backgroundColor: '#FFC107',
+    borderRadius: 8,
+    margin: 16,
+    paddingVertical: 16,
     alignItems: 'center',
   },
   searchButtonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  busCard: {
-    flexDirection: 'row',
-    marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 8,
-  },
-  busImage: {
-    width: 100,
-    height: 100,
-    marginRight: 16,
-  },
-  busDetails: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  busName: {
+    color: 'black',
     fontSize: 18,
     fontWeight: 'bold',
   },
+  recentSearchContainer:{
+      marginHorizontal:16, 
+      marginBottom: 16
+  },
+  recentSearchTitle:{
+      color: '#ffcdd2',
+      marginBottom: 8
+  },
+  recentSearchCard: {
+    backgroundColor: '#c62828',
+    borderRadius: 8,
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  recentSearchText:{
+      color: 'white',
+      fontWeight: 'bold'
+  },
+  recentSearchDate:{
+      color: '#ffcdd2'
+  },
+  bookNowButton:{
+      backgroundColor: 'white',
+      paddingVertical: 8,
+      paddingHorizontal: 12,
+      borderRadius: 4
+  },
+  bookNowText:{
+      color: '#d32f2f',
+      fontWeight: 'bold'
+  },
+  bottomNav:{
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      backgroundColor: 'white',
+      paddingTop: 8,
+      paddingBottom: 16,
+      borderTopWidth: 1,
+      borderTopColor: '#eee'
+  },
+  navItem:{
+      alignItems: 'center'
+  },
+  navText:{
+      color: 'gray',
+      fontSize: 12
+  },
+  navTextActive:{
+      color: '#d32f2f',
+      fontSize: 12,
+      fontWeight: 'bold'
+  }
 });
 
 export default BusScreen;
