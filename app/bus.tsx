@@ -32,6 +32,10 @@ const BusScreen = () => {
             <Text style={styles.label}>To</Text>
             <TextInput style={styles.input} defaultValue="Hamirpur, Himachal Pradesh" />
           </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>No. of Seats</Text>
+            <TextInput style={styles.input} defaultValue="1" keyboardType="numeric" />
+          </View>
         </View>
 
         <View style={styles.dateCard}>
