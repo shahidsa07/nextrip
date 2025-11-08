@@ -8,11 +8,6 @@ const BusScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <View style={styles.header}>
-          <Text style={styles.logo}>redBus</Text>
-          <IconSymbol name="bell" size={24} color="white" />
-        </View>
-
         <View style={styles.tabContainer}>
           <TouchableOpacity style={styles.tabItem}>
             <Text style={styles.tabTextActive}>Bus Tickets</Text>
@@ -95,19 +90,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#d32f2f',
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 50,
-    paddingBottom: 16,
-  },
-  logo: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
   tabContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -116,7 +98,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 4,
     borderWidth: 1,
-    borderColor: '#c62828'
+    borderColor: '#c62828',
+    marginTop: 16
   },
   tabItem: {
     padding: 8,

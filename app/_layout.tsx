@@ -17,6 +17,18 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen 
+          name="bus" 
+          options={{ 
+            title: '', 
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: '#d32f2f',
+            },
+            headerTintColor: '#fff',
+            headerBackTitleVisible: false
+          }} 
+        />
       </Stack>
       <StatusBar style="dark" />
     </ThemeProvider>
